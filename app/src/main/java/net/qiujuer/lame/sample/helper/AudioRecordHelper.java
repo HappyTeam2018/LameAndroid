@@ -35,6 +35,9 @@ public class AudioRecordHelper {
     }
 
     private AudioRecord initAudioRecord() {
+        /**
+         * 从可常见的采样率、采样位数、和声道数从高到低尝试初始化支持格式？
+         */
         for (int rate : SAMPLE_RATES) {
             for (short audioFormat : new short[]{AudioFormat.ENCODING_PCM_16BIT, AudioFormat.ENCODING_PCM_8BIT}) {
                 for (short channelConfig : new short[]{AudioFormat.CHANNEL_IN_STEREO, AudioFormat.CHANNEL_IN_MONO}) {

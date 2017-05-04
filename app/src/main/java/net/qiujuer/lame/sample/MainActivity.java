@@ -1,6 +1,7 @@
 package net.qiujuer.lame.sample;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         record.setOnTouchListener(this);
         record.setClickable(true);
 
-        File tmp = new File(getCacheDir(), "tmp.mp3");
+        File tmp = new File(Environment.getExternalStorageDirectory(), "tmp.mp3");
 
         mAudioPlayHelper = new AudioPlayHelper<>(new AudioPlayHelper.RecordPlayListener<Object>() {
             @Override
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             @SuppressWarnings("unchecked")
             @Override
             public void onRecordDone(final File file, final long time) {
-                showStatus("Record done!\n\rFile size:" + file.length() + "B Time:" + time + "ms");
+                showStatus("Record done!\n\rFile size:" + file.length() + "B Time:" + time + "ms\n" + file.getAbsolutePath());
                 mAudioPlayHelper.trigger(MainActivity.this, file.getAbsolutePath());
             }
         });
